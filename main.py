@@ -49,6 +49,7 @@ def button1_clicked():
     # plt.hist(y, bins=[0, 0.5, 1])
     plt.show()
 
+
 def button2_clicked():
     df['web_or_mobile'] = df['web_or_mobile'].replace(['web developer'], 1)
     df['web_or_mobile'] = df['web_or_mobile'].replace(['Mobile application developer'], 1)
@@ -90,6 +91,19 @@ def button2_clicked():
     plt.show()
 
 
+def button3_clicked():
+
+    df['salary'] = df['salary'].replace(['0$'], 0)
+    df['salary'] = df['salary'].replace(['100 $ - 500 $'], 250)
+    df['salary'] = df['salary'].replace(['500 $ - 1000 $'], 750)
+    df['salary'] = df['salary'].replace(['1000 $ - 1500 $'], 1250)
+    df['salary'] = df['salary'].replace(['1500 $ - 2000 $'], 1750)
+    salary = df[['salary']]
+    salary['age'] = age
+    plot = sns.lmplot(data=salary, x="salary", y="age", hue='salary')
+    plot.set_axis_labels("Salary in dollars $", "Age", 'jh')
+    plt.gca().set_title("correlation between age and salary")
+    plt.show()
 
 
 frame = tk.Frame(root)
@@ -101,7 +115,7 @@ button1.grid(row=0, column=0, padx=5, pady=5)
 button2 = tk.Button(frame, text="theory 2", height=2, width=15, command=button2_clicked)
 button2.grid(row=0, column=1, padx=5, pady=5)
 
-button3 = tk.Button(frame, text="theory 3", height=2, width=15)
+button3 = tk.Button(frame, text="theory 3", height=2, width=15, command=button3_clicked)
 button3.grid(row=1, column=0, padx=5, pady=5)
 
 button4 = tk.Button(frame, text="theory 4", height=2, width=15)
