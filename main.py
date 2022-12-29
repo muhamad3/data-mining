@@ -108,23 +108,14 @@ def hobby_developer():
         elif web_dev['spending_spare_time'][i] == 5:
                 height[4] = height[4] + 1
 
-
-    # Data set
-    # height = web_dev['spending_spare_time']
     bars = ('gaming', 'other', 'going out', 'sports', 'watching TV')
     y_pos = np.arange(len(bars))
-
-    # Basic plot
     plt.bar(y_pos, height, color=(0.2, 0.8, 0.6, 0.6))
-
-    # use the plt.xticks function to custom labels
     plt.xticks(y_pos, bars)
     plt.show()
 
 
 def age_salary():
-    print(age)
-    print(salary)
     salary_age = salary
     salary_age['age'] = age
     plot = sns.lmplot(data=salary, x="salary", y="age", hue='salary')
@@ -135,9 +126,8 @@ def age_salary():
 
 
 def satisfaction_age():
-    print(age)
+
     satisfaction_agev = df[['satisfied']]
-    print(satisfaction_agev)
     satisfaction_agev['age'] = age
     plot = sns.lmplot(data=satisfaction_agev, x="satisfied", y="age", hue='satisfied', height=5.5)
     plot.set_axis_labels("Satisfaction on scale 1 - 5", "Age")
@@ -147,9 +137,6 @@ def satisfaction_age():
 
 
 def education_age_salary():
-    print(age)
-    print(salary)
-    print(education)
     age_salary3 = age
     age_salary3['salary'] = df[['salary']]
     age_salary3 = StandardScaler().fit_transform(age_salary3)
@@ -171,7 +158,6 @@ def satisfaction_age_salary():
     age_salary1 = StandardScaler().fit_transform(age_salary2)
     pca = decomposition.PCA(n_components=1)
     sklearn_pca_age_salary = pca.fit_transform(age_salary1)
-    # print(sklearn_pca_age_salary)
     sklearn_result = pd.DataFrame(sklearn_pca_age_salary, columns=['age_salary'])
     sklearn_result['satisfied'] = df[['satisfied']]
     print(sklearn_result)
